@@ -1,0 +1,24 @@
+version: "3.5"
+services:
+  sgcommander-database:
+    image: mysql:5.7.32
+    container_name: sgcommander-database
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORDROOT}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - "./docker/mysql/data:/var/lib/mysql"
+    restart: always
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    expose:
+      - ${DB_PORT}
+    networks:
+      - sgcommander-network
+
+networks:
+  sgcommander-network:
+    driver: bridge
+    name: sgcommander-network
